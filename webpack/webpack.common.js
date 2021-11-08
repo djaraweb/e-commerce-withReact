@@ -11,10 +11,13 @@ module.exports = {
     assetModuleFilename: "assets/images/[name].[contenthash][ext][query]",
   },
   resolve: {
-    extensions: [".jsx", ".js", ".sass"],
+    extensions: [".tsx", ".jsx", ".js"],
     alias: {
       "@": path.resolve(__dirname, "..", "src/"),
       "@components": path.resolve(__dirname, "..", "src/components/"),
+      "@context": path.resolve(__dirname, "..", "src/context/"),
+      "@hooks": path.resolve(__dirname, "..", "src/hooks/"),
+      "@pages": path.resolve(__dirname, "..", "src/hooks/"),
       "@sass": path.resolve(__dirname, "..", "src/assets/sass/"),
       "@css": path.resolve(__dirname, "..", "src/assets/css/"),
       "@images": path.resolve(__dirname, "..", "src/assets/images/"),
@@ -23,7 +26,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|js)x|js?$/,
+        test: /\.jsx|js?$/,
         exclude: /node_modules/,
         use: [
           {
@@ -43,20 +46,24 @@ module.exports = {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
         type: "asset/inline",
       },
+      {
+        test: /\.tsx|ts?$/,
+        exclude: /node_modules/,
+        use: "ts-loader",
+      },
     ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      //inject: true,
-      //template: "./public/index.html",
+      inject: true,
       template: path.resolve(__dirname, "..", "./public/index.html"),
-      //filename: "./index.html",
+      filename: "./index.html",
     }),
     new MiniCssExtractPlugin({
       filename: "assets/styles/[name].[contenthash].css",
     }),
     new Dotenv(),
   ],
-  stats: "errors-only",
+  stats: "errors-only", // Muestra solo errores
 };
