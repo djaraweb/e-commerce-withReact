@@ -15,12 +15,14 @@ module.exports = {
     alias: {
       "@": path.resolve(__dirname, "..", "src/"),
       "@components": path.resolve(__dirname, "..", "src/components/"),
+      "@containers": path.resolve(__dirname, "..", "src/containers/"),
       "@context": path.resolve(__dirname, "..", "src/context/"),
       "@hooks": path.resolve(__dirname, "..", "src/hooks/"),
       "@pages": path.resolve(__dirname, "..", "src/pages/"),
-      "@sass": path.resolve(__dirname, "..", "src/assets/sass/"),
-      "@css": path.resolve(__dirname, "..", "src/assets/css/"),
-      "@images": path.resolve(__dirname, "..", "src/assets/images/"),
+      "@sass": path.resolve(__dirname, "..", "src/assets/styles/sass/"),
+      "@css": path.resolve(__dirname, "..", "src/assets/styles/css/"),
+      "@icons": path.resolve(__dirname, "..", "src/assets/icons/"),
+      "@logos": path.resolve(__dirname, "..", "src/assets/logos/"),
     },
   },
   module: {
@@ -36,15 +38,15 @@ module.exports = {
       },
       {
         test: /\.(s[ac]ss|css)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg|)$/i,
         type: "asset/resource",
       },
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-        type: "asset/inline",
+        test: /\.(woff(2)?|eot|ttf|otf|)$/,
+        type: "asset/fonts",
       },
       {
         test: /\.tsx|ts?$/,
@@ -65,5 +67,5 @@ module.exports = {
     }),
     new Dotenv(),
   ],
-  stats: "errors-only", // Muestra solo errores
+  //stats: "errors-only", // Muestra solo errores
 };

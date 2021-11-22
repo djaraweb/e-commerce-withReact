@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "@components/App";
-import "@sass/global.scss";
-import "@css/stylebase.css";
+import App from "./routes/App";
+
+import "@css/global.css";
 
 ReactDOM.render(<App />, document.getElementById("app"));

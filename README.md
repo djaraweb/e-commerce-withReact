@@ -1,23 +1,11 @@
-# Config Base webpack with React
+# Config Base webpack with React and Typescript
 
 Configuracion Base Webpack, Babel con React.js
 
-#### Dependencias Requeridas
+#### Instalar Dependencias Requeridas
 
 ```
-$ npm i react react-dom -S
-```
-
-#### Dependencias Desarrollo
-
-```
-$ npm i @babel/core @babel/preset-env @babel/preset-react babel-loader -D
-$ npm i @babel/plugin-transform-runtime -D
-$ npm i webpack webpack-cli webpack-dev-server clean-webpack-plugin -D
-$ npm i html-loader html-webpack-plugin -D
-$ npm i mini-css-extract-plugin css-loader sass sass-loader -D
-$ npm i css-minimizer-webpack-plugin terser-webpack-plugin -D
-$ npm i dotenv-webpack -D
+$ npm install
 ```
 
 #### Config file .babelrc
@@ -29,14 +17,50 @@ $ npm i dotenv-webpack -D
 }
 ```
 
-#### Config files webpack.config.dev.js and webpack.config.prod.js
+#### Config file tsconfig.json
+
+```
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "es5",
+    "module": "es6",
+    "jsx": "react",
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@components": ["src/components/*"],
+      "@containers": ["src/containers/*"],
+      "@context": ["src/context/*"],
+      "@hooks": ["src/hooks/*"],
+      "@icons": ["src/assets/icons/*"],
+      "@logos": ["src/assets/logos/*"]
+    }
+  }
+}
+```
+
+#### Config file custom.d.ts
+
+```
+declare module "*.svg" {
+  const content: any;
+  export default content;
+}
+declare module "*.png";
+declare module "*.tsx";
+declare module "*.ts";
+```
+
+#### Config files webpack.dev.js and webpack.prod.js
 
 #### Config scripts in file package.json
 
 ```
 {
-    "build": "webpack --config webpack.config.prod.js",
-    "dev": "webpack --config webpack.config.dev.js",
-    "start": "webpack serve --config webpack.config.dev.js"
+    "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
+    "build": "webpack --config webpack/webpack.config.js --env env=prod"
 }
 ```

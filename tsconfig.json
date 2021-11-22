@@ -10,8 +10,11 @@
     "baseUrl": "./",
     "paths": {
       "@components": ["src/components/*"],
-      "@context": ["src/components/*"],
-      "@hooks": ["src/components/*"]
+      "@containers": ["src/containers/*"],
+      "@context": ["src/context/*"],
+      "@hooks": ["src/hooks/*"],
+      "@icons": ["src/assets/icons/*"],
+      "@logos": ["src/assets/logos/*"]
     }
   }
 }
