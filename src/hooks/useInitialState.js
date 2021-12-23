@@ -1,6 +1,7 @@
 import { useState } from "react";
 const initialState = {
   cart: [],
+  toggleOrders: false,
 };
 
 const useInitialState = () => {
@@ -20,10 +21,18 @@ const useInitialState = () => {
     });
   };
 
+  const showToggleOrders = (payload) => {
+    setState({
+      ...state,
+      toggleOrders: payload,
+    });
+  };
+
   return {
     state,
     addToCart,
     removeFromCart,
+    showToggleOrders,
   };
 };
 

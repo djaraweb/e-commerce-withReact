@@ -11,9 +11,9 @@ import "@sass/Header.scss";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
-  const [toggleOrders, setToggleOrders] = useState(false);
+
   const handleToggle = () => setToggle(!toggle);
-  const { state } = useContext(AppContext);
+  const { state, showToggleOrders } = useContext(AppContext);
 
   return (
     <nav>
@@ -48,7 +48,7 @@ const Header = () => {
           </li>
           <li
             className="navbar-shopping-cart"
-            onClick={() => setToggleOrders(!toggleOrders)}
+            onClick={() => showToggleOrders(!state.toggleOrders)}
           >
             <img src={shoppingCart} alt="shopping cart" />
             {state.cart.length > 0 ? <div>{state.cart.length}</div> : null}
@@ -56,7 +56,7 @@ const Header = () => {
         </ul>
       </div>
       {toggle && <Menu />}
-      {toggleOrders && <MyOrder />}
+      {state.toggleOrders && <MyOrder />}
     </nav>
   );
 };

@@ -6,19 +6,24 @@ import AppContext from "@context/AppContext";
 import "@sass/MyOrder.scss";
 
 const MyOrder = () => {
-  const { state } = useContext(AppContext);
+  const { state, showToggleOrders } = useContext(AppContext);
+
   const sumTotalOrders = () => {
     const reducer = (acumulador, currentValue) =>
       acumulador + currentValue.price;
     const sum = state.cart.reduce(reducer, 0);
-
     return sum;
   };
 
   return (
     <aside className="MyOrder">
       <div className="title-container">
-        <img src={iconFlecha} alt="arrow" />
+        <img
+          src={iconFlecha}
+          alt="arrow"
+          onClick={() => showToggleOrders(!state.toggleOrders)}
+          style={{ cursor: "pointer" }}
+        />
         <p className="title">My order(s)</p>
       </div>
       <div className="my-order-content">
